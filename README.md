@@ -60,7 +60,7 @@ This module is distributed via [npm][npm] which is bundled with [node][node] and
 should be installed as one of your project's dependencies:
 
 ```
-npm install prisma-extension-nested-operations
+npm install @candoimage/prisma-extension-nested-operations
 ```
 
 `@prisma/client` is a peer dependency of this library, so you will need to
@@ -70,7 +70,7 @@ install it if you haven't already:
 npm install @prisma/client
 ```
 
-You must have at least @prisma/client version 4.16.0 installed.
+You must have at least @prisma/client version 7.0.0 installed.
 
 ## Usage
 
@@ -78,12 +78,15 @@ The `withNestedOperations()` function takes and object with two properties, `$ro
 The return value is an `$allOperations` hook, so it can be passed directly to an extensions `$allOperations` hook.
 
 ```javascript
-import { withNestedOperations } from "prisma-extension-nested-operations";
+import { Prisma } from "@prisma/client";
+import { withNestedOperations } from "@candoimage/prisma-extension-nested-operations";
 
 client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           // update root params here
           const result = params.query(params.args);
@@ -279,6 +282,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         $rootOperation: (params) => {
           return params.query(params.args);
         },
@@ -428,6 +433,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         $rootOperation: (params) => {
           return params.query(params.args);
         },
@@ -950,6 +957,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           // we only want to add default values for the "Invite" model
           if (params.model !== "Invite") {
@@ -990,6 +999,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           [...]
         },
@@ -1032,6 +1043,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           // don't handle operations that only accept unique fields such as findUnique or upsert
           if (
@@ -1070,6 +1083,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           [...]
         },
@@ -1104,6 +1119,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           const result = await params.query(params.args);
 
@@ -1151,6 +1168,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           [...]
         },
@@ -1188,6 +1207,8 @@ const client = _client.$extends({
   query: {
     $allModels: {
       $allOperations: withNestedOperations({
+        dmmf: Prisma.dmmf,
+        inlineSchema: (client as any)._engineConfig?.inlineSchema,
         async $rootOperation(params) {
           [...]
         },
@@ -1237,11 +1258,11 @@ Apache 2.0
 [node]: https://nodejs.org
 [build-badge]: https://github.com/olivierwilkinson/prisma-extension-nested-operations/workflows/prisma-extension-nested-operations/badge.svg
 [build]: https://github.com/olivierwilkinson/prisma-extension-nested-operations/actions?query=branch%3Amain+workflow%3Aprisma-extension-nested-operations
-[version-badge]: https://img.shields.io/npm/v/prisma-extension-nested-operations.svg?style=flat-square
-[package]: https://www.npmjs.com/package/prisma-extension-nested-operations
-[downloads-badge]: https://img.shields.io/npm/dm/prisma-extension-nested-operations.svg?style=flat-square
-[npmtrends]: http://www.npmtrends.com/prisma-extension-nested-operations
-[license-badge]: https://img.shields.io/npm/l/prisma-extension-nested-operations.svg?style=flat-square
+[version-badge]: https://img.shields.io/npm/v/@candoimage/prisma-extension-nested-operations.svg?style=flat-square
+[package]: https://www.npmjs.com/package/@candoimage/prisma-extension-nested-operations
+[downloads-badge]: https://img.shields.io/npm/dm/@candoimage/prisma-extension-nested-operations.svg?style=flat-square
+[npmtrends]: http://www.npmtrends.com/@candoimage/prisma-extension-nested-operations
+[license-badge]: https://img.shields.io/npm/l/@candoimage/prisma-extension-nested-operations.svg?style=flat-square
 [license]: https://github.com/olivierwilkinson/prisma-extension-nested-operations/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
