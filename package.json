@@ -1,6 +1,6 @@
 {
   "name": "@candoimage/prisma-extension-nested-operations",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Utils for creating Prisma client extensions with nested operations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,8 +42,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^10.3.0",
-    "@prisma/adapter-pg": "^7.1.0",
-    "@prisma/client": "^7.1.0",
+    "@prisma/adapter-pg": "7.1.0",
+    "@prisma/client": "7.1.0",
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.24",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
@@ -54,7 +54,7 @@
     "jest": "^30.2.0",
     "kcd-scripts": "^17.0.0",
     "npm-run-all": "^4.1.5",
-    "prisma": "^7.1.0",
+    "prisma": "7.1.0",
     "semantic-release": "19.0.3",
     "ts-jest": "^29.4.6",
     "ts-node": "^10.9.2",
