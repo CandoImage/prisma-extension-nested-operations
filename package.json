@@ -1,6 +1,6 @@
 {
   "name": "@candoimage/prisma-extension-nested-operations",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Utils for creating Prisma client extensions with nested operations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
