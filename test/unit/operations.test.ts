@@ -1,10 +1,11 @@
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import { get, set } from "lodash";
 
 import { withNestedOperations } from "../../src";
 import { createParams } from "./helpers/createParams";
 import { wait } from "./helpers/wait";
 import { Prisma } from "@prisma/client";
+import { TEST_INLINE_SCHEMA } from "./helpers/inlineSchema";
 
 describe("operations", () => {
   it("applies query to operations moved to new action type", async () => {
@@ -29,29 +30,29 @@ describe("operations", () => {
             ...params.args,
             update: {
               ...params.args.update,
-              number: faker.datatype.number(),
+              number: faker.number.int(),
             },
           });
         }
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
           upsert: {
-            where: { id: faker.datatype.number() },
+            where: { id: faker.number.int() },
             create: { title: faker.lorem.sentence() },
             update: { title: faker.lorem.sentence() },
           },
           update: {
-            where: { id: faker.datatype.number() },
+            where: { id: faker.number.int() },
             data: { title: faker.lorem.sentence() },
           },
         },
@@ -104,21 +105,21 @@ describe("operations", () => {
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
           update: {
-            where: { id: faker.datatype.number() },
+            where: { id: faker.number.int() },
             data: { title: faker.lorem.sentence() },
           },
           upsert: {
-            where: { id: faker.datatype.number() },
+            where: { id: faker.number.int() },
             create: { title: faker.lorem.sentence() },
             update: { title: faker.lorem.sentence() },
           },
@@ -158,12 +159,12 @@ describe("operations", () => {
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         profile: {
@@ -213,7 +214,7 @@ describe("operations", () => {
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -222,13 +223,13 @@ describe("operations", () => {
         email: faker.internet.email(),
         posts: {
           create: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
             comments: {
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
-                authorId: faker.datatype.number(),
+                authorId: faker.number.int(),
               },
             },
           },
@@ -300,22 +301,22 @@ describe("operations", () => {
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
           create: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
             comments: {
               create: {
-                id: faker.datatype.number(),
-                authorId: faker.datatype.number(),
+                id: faker.number.int(),
+                authorId: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             },
@@ -367,17 +368,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             create: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               title: faker.lorem.sentence(),
             },
           },
@@ -415,12 +416,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -456,12 +457,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -496,12 +497,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -540,17 +541,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             create: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               title: faker.lorem.sentence(),
             },
           },
@@ -583,17 +584,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: { title: faker.lorem.sentence() },
             },
           },
@@ -621,17 +622,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: { title: faker.lorem.sentence() },
             },
           },
@@ -665,17 +666,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
               },
@@ -708,17 +709,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
               },
@@ -755,17 +756,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
               },
@@ -806,17 +807,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
               },
@@ -851,17 +852,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
               },
@@ -895,17 +896,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             upsert: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
                 title: faker.lorem.sentence(),
               },
@@ -938,23 +939,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
@@ -984,23 +985,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
@@ -1040,23 +1041,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
@@ -1094,23 +1095,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
@@ -1148,23 +1149,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: faker.lorem.sentence() },
                 update: { title: faker.lorem.sentence() },
               },
@@ -1198,12 +1199,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -1244,12 +1245,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -1294,12 +1295,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -1343,12 +1344,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -1391,12 +1392,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -1446,16 +1447,16 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
-            delete: { id: faker.datatype.number() },
+            delete: { id: faker.number.int() },
           },
         },
       });
@@ -1489,20 +1490,20 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
         where: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
         },
         data: {
           email: faker.internet.email(),
           posts: {
             delete: [
-              { id: faker.datatype.number() },
-              { id: faker.datatype.number() },
+              { id: faker.number.int() },
+              { id: faker.number.int() },
             ],
           },
         },
@@ -1537,13 +1538,13 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
         where: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
         },
         data: {
           email: faker.internet.email(),
@@ -1577,21 +1578,21 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
                 comments: {
-                  delete: { id: faker.datatype.number() },
+                  delete: { id: faker.number.int() },
                 },
               },
             },
@@ -1628,23 +1629,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
                 comments: {
                   delete: [
-                    { id: faker.datatype.number() },
-                    { id: faker.datatype.number() },
+                    { id: faker.number.int() },
+                    { id: faker.number.int() },
                   ],
                 },
               },
@@ -1678,23 +1679,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: faker.lorem.sentence(),
                 comments: {
                   delete: [
-                    { id: faker.datatype.number() },
-                    { id: faker.datatype.number() },
+                    { id: faker.number.int() },
+                    { id: faker.number.int() },
                   ],
                 },
               },
@@ -1725,18 +1726,18 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             delete: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
               },
             ],
           },
@@ -1770,18 +1771,18 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             deleteMany: [
-              { id: faker.datatype.number() },
-              { id: faker.datatype.number() },
+              { id: faker.number.int() },
+              { id: faker.number.int() },
             ],
           },
         },
@@ -1817,18 +1818,18 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             deleteMany: [
-              { id: faker.datatype.number() },
-              { id: faker.datatype.number() },
+              { id: faker.number.int() },
+              { id: faker.number.int() },
             ],
           },
         },
@@ -1859,18 +1860,18 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -1901,18 +1902,18 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -1946,18 +1947,18 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -1992,18 +1993,18 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -2039,18 +2040,18 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -2086,18 +2087,18 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -2128,20 +2129,20 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 title: faker.lorem.sentence(),
               },
             },
@@ -2174,20 +2175,20 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 title: faker.lorem.sentence(),
               },
             },
@@ -2223,20 +2224,20 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 title: faker.lorem.sentence(),
               },
             },
@@ -2273,20 +2274,20 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 title: faker.lorem.sentence(),
               },
             },
@@ -2324,20 +2325,20 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 title: faker.lorem.sentence(),
               },
             },
@@ -2369,20 +2370,20 @@ describe("operations", () => {
           }
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
 
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 title: faker.lorem.sentence(),
               },
             },
@@ -2413,12 +2414,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "findUnique", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         include: {
           posts: true,
         },
@@ -2448,12 +2449,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "findUnique", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         include: {
           posts: {
             select: {
@@ -2489,23 +2490,23 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
         where: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
         },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: { title: faker.lorem.sentence() },
             },
             delete: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -2547,24 +2548,24 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
         where: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
         },
         data: {
           email: faker.internet.email(),
           posts: {
             update: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: { title: faker.lorem.sentence() },
             },
             delete: [
-              { id: faker.datatype.number() },
-              { id: faker.datatype.number() },
+              { id: faker.number.int() },
+              { id: faker.number.int() },
             ],
           },
         },
@@ -2610,22 +2611,22 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             update: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 data: { title: faker.lorem.sentence() },
               },
             ],
-            delete: { id: faker.datatype.number() },
+            delete: { id: faker.number.int() },
           },
         },
       });
@@ -2666,26 +2667,26 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
         where: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
         },
         data: {
           email: faker.internet.email(),
           posts: {
             update: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 data: { title: faker.lorem.sentence() },
               },
             ],
             delete: [
-              { id: faker.datatype.number() },
-              { id: faker.datatype.number() },
+              { id: faker.number.int() },
+              { id: faker.number.int() },
             ],
           },
         },
@@ -2731,28 +2732,28 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
         where: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
         },
         data: {
           email: faker.internet.email(),
           posts: {
             update: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 data: {
                   title: faker.lorem.sentence(),
                   comments: {
                     update: {
-                      where: { id: faker.datatype.number() },
+                      where: { id: faker.number.int() },
                       data: { content: "test comment content" },
                     },
-                    delete: { id: faker.datatype.number() },
+                    delete: { id: faker.number.int() },
                   },
                 },
               },
@@ -2812,12 +2813,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
@@ -2827,12 +2828,12 @@ describe("operations", () => {
             },
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: "first-upsert" },
                 update: { title: "first-upsert" },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: "second-upsert" },
                 update: { title: "second-upsert" },
               },
@@ -2878,12 +2879,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -2930,12 +2931,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -2978,12 +2979,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -3027,17 +3028,17 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
-            create: { id: faker.datatype.number() },
-            connect: { id: faker.datatype.number() },
+            create: { id: faker.number.int() },
+            connect: { id: faker.number.int() },
           },
         },
       });
@@ -3066,12 +3067,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -3080,11 +3081,11 @@ describe("operations", () => {
               age: 20,
             },
             connectOrCreate: {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               create: { bio: faker.lorem.sentence() },
             },
             update: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
           },
         },
@@ -3116,26 +3117,26 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           posts: {
             disconnect: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
             },
             upsert: [
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: "first-upsert" },
                 update: { title: "first-upsert" },
               },
               {
-                where: { id: faker.datatype.number() },
+                where: { id: faker.number.int() },
                 create: { title: "second-upsert" },
                 update: { title: "second-upsert" },
               },
@@ -3168,12 +3169,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -3203,12 +3204,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -3238,12 +3239,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -3273,12 +3274,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "update", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         data: {
           email: faker.internet.email(),
           profile: {
@@ -3308,12 +3309,12 @@ describe("operations", () => {
 
           return params.query(params.args);
         },
-        dmmf: Prisma.dmmf,
+        dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
       });
 
       const query = jest.fn((_: any) => Promise.resolve(null));
       const params = createParams(query, "User", "findUnique", {
-        where: { id: faker.datatype.number() },
+        where: { id: faker.number.int() },
         include: {
           posts: {
             select: { deleted: true },

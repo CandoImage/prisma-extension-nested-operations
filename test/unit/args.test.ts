@@ -1,10 +1,11 @@
 import { Prisma } from "@prisma/client";
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 import { set } from "lodash";
 
 import { withNestedOperations } from "../../src";
 import { createParams } from "./helpers/createParams";
 import { wait } from "./helpers/wait";
+import { TEST_INLINE_SCHEMA } from "./helpers/inlineSchema";
 
 describe("args", () => {
   it("does not mutate passed params object", async () => {
@@ -18,7 +19,7 @@ describe("args", () => {
         params.args.test = "test";
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -44,7 +45,7 @@ describe("args", () => {
       $allNestedOperations: (params) => {
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -88,7 +89,7 @@ describe("args", () => {
       $allNestedOperations: (params) => {
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve({}));
@@ -121,7 +122,7 @@ describe("args", () => {
       $allNestedOperations: (params) => {
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -148,12 +149,12 @@ describe("args", () => {
         if (params.model === "Post") {
           return params.query({
             ...params.args,
-            number: faker.datatype.number(),
+            number: faker.number.int(),
           });
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -191,12 +192,12 @@ describe("args", () => {
           await wait(100);
           return params.query({
             ...params.args,
-            number: faker.datatype.number(),
+            number: faker.number.int(),
           });
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -238,7 +239,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -291,17 +292,17 @@ describe("args", () => {
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         comments: {
           update: {
-            where: { id: faker.datatype.number() },
+            where: { id: faker.number.int() },
             data: {
               content: "1",
               repliedTo: {
@@ -367,22 +368,22 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
           update: [
             {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: { title: "first" },
             },
             {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: { title: "second" },
             },
           ],
@@ -422,12 +423,12 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
@@ -462,36 +463,36 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
           update: [
             {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: "first",
                 comments: {
                   create: {
                     content: "first post comment",
-                    authorId: faker.datatype.number(),
+                    authorId: faker.number.int(),
                   },
                 },
               },
             },
             {
-              where: { id: faker.datatype.number() },
+              where: { id: faker.number.int() },
               data: {
                 title: "second",
                 comments: {
                   create: {
                     content: "second post comment",
-                    authorId: faker.datatype.number(),
+                    authorId: faker.number.int(),
                   },
                 },
               },
@@ -564,12 +565,12 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
     const params = createParams(query, "User", "update", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       data: {
         email: faker.internet.email(),
         posts: {
@@ -580,11 +581,11 @@ describe("args", () => {
                 create: [
                   {
                     content: "first post comment",
-                    authorId: faker.datatype.number(),
+                    authorId: faker.number.int(),
                   },
                   {
                     content: "second post comment",
-                    authorId: faker.datatype.number(),
+                    authorId: faker.number.int(),
                   },
                 ],
               },
@@ -595,11 +596,11 @@ describe("args", () => {
                 create: [
                   {
                     content: "first post comment",
-                    authorId: faker.datatype.number(),
+                    authorId: faker.number.int(),
                   },
                   {
                     content: "second post comment",
-                    authorId: faker.datatype.number(),
+                    authorId: faker.number.int(),
                   },
                 ],
               },
@@ -676,7 +677,7 @@ describe("args", () => {
       $allNestedOperations: (params) => {
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -717,7 +718,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -765,7 +766,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -826,7 +827,7 @@ describe("args", () => {
       $allNestedOperations: (params) => {
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -880,7 +881,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -935,7 +936,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -989,18 +990,18 @@ describe("args", () => {
             data: [
               ...params.args.data.map((data: any) => ({
                 ...data,
-                number: faker.datatype.number(),
+                number: faker.number.int(),
               })),
               {
                 content: faker.lorem.sentence(),
-                number: faker.datatype.number(),
+                number: faker.number.int(),
               },
             ],
           });
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1047,7 +1048,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1088,18 +1089,18 @@ describe("args", () => {
             data: [
               ...params.args.data.map((data: any) => ({
                 ...data,
-                number: faker.datatype.number(),
+                number: faker.number.int(),
               })),
               {
                 content: faker.lorem.sentence(),
-                number: faker.datatype.number(),
+                number: faker.number.int(),
               },
             ],
           });
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1142,14 +1143,14 @@ describe("args", () => {
           return params.query({
             ...params.args,
             data: [
-              { ...params.args.data[0], number: faker.datatype.number() },
-              { number: faker.datatype.number() },
+              { ...params.args.data[0], number: faker.number.int() },
+              { number: faker.number.int() },
             ],
           });
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1202,7 +1203,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1243,7 +1244,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1288,7 +1289,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1331,7 +1332,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1392,7 +1393,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1464,7 +1465,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1500,7 +1501,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1548,7 +1549,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1606,7 +1607,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1654,7 +1655,7 @@ describe("args", () => {
         }
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1709,7 +1710,7 @@ describe("args", () => {
           await wait(100);
           return params.query({
             ...params.args,
-            number: faker.datatype.number(),
+            number: faker.number.int(),
           });
         }
 
@@ -1717,13 +1718,13 @@ describe("args", () => {
           await wait(200);
           return params.query({
             ...params.args,
-            number: faker.datatype.number(),
+            number: faker.number.int(),
           });
         }
 
         return params.query(params.args);
       },
-      dmmf: Prisma.dmmf,
+      dmmf: Prisma.dmmf, inlineSchema: TEST_INLINE_SCHEMA,
     });
 
     const query = jest.fn((_: any) => Promise.resolve(null));
@@ -1736,7 +1737,7 @@ describe("args", () => {
             comments: {
               create: {
                 content: faker.lorem.sentence(),
-                authorId: faker.datatype.number(),
+                authorId: faker.number.int(),
               },
             },
           },

@@ -1,8 +1,10 @@
 import { Post, Prisma, User } from "@prisma/client";
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 
 import { withNestedOperations } from "../../src";
 import client from "./client";
+
+const inlineSchema = (client as any)._engineConfig?.inlineSchema as string | undefined;
 
 describe("smoke", () => {
   let testClient: any;
@@ -78,6 +80,7 @@ describe("smoke", () => {
                 return query(args);
               },
               dmmf: Prisma.dmmf,
+              inlineSchema,
             }),
           },
         },
@@ -178,6 +181,7 @@ describe("smoke", () => {
                 return query(args);
               },
               dmmf: Prisma.dmmf,
+              inlineSchema,
             }),
           },
         },
@@ -185,7 +189,7 @@ describe("smoke", () => {
     });
 
     it("calls middleware with groupBy action", async () => {
-      await expect(testClient.comment.findMany()).rejects.toThrowError(
+      await expect(testClient.comment.findMany()).rejects.toThrow(
         "expected groupBy action"
       );
 
@@ -222,6 +226,7 @@ describe("smoke", () => {
                 return query(args);
               },
               dmmf: Prisma.dmmf,
+              inlineSchema,
             }),
           },
         },

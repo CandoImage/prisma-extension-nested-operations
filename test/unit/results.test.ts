@@ -1,4 +1,4 @@
-import faker from "faker";
+import { faker } from "@faker-js/faker";
 
 import { withNestedOperations } from "../../src";
 import { createParams } from "./helpers/createParams";
@@ -30,7 +30,7 @@ describe("modifying results", () => {
 
     const query = jest.fn(() => Promise.resolve(null));
     const params = createParams(query, "User", "findUnique", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
     });
     const result = await allOperations(params);
 
@@ -70,7 +70,7 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email,
       })
     );
@@ -98,24 +98,24 @@ describe("modifying results", () => {
 
     const clientResult = [
       {
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         title: faker.lorem.sentence(),
         author: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           email: faker.internet.email(),
           profile: null,
           posts: [
             {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               title: faker.lorem.sentence(),
               comments: [
-                { id: faker.datatype.number(), content: faker.lorem.text() },
-                { id: faker.datatype.number(), content: faker.lorem.text() },
-                { id: faker.datatype.number(), content: faker.lorem.text() },
+                { id: faker.number.int(), content: faker.lorem.text() },
+                { id: faker.number.int(), content: faker.lorem.text() },
+                { id: faker.number.int(), content: faker.lorem.text() },
               ],
             },
             {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               title: faker.lorem.sentence(),
               comments: null,
             },
@@ -123,22 +123,22 @@ describe("modifying results", () => {
         },
         comments: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             content: faker.lorem.paragraph(),
             author: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               email: faker.internet.email(),
             },
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             content: faker.lorem.paragraph(),
             author: null,
           },
         ],
       },
       {
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         title: faker.lorem.sentence(),
         author: null,
         comments: null,
@@ -189,7 +189,7 @@ describe("modifying results", () => {
         comments: [
           {
             author: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               email: faker.internet.email(),
             },
           },
@@ -245,14 +245,14 @@ describe("modifying results", () => {
 
     const clientResult = [
       {
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         title: faker.lorem.sentence(),
         author: {
           email: faker.internet.email(),
           profile: null,
           posts: [
             {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               title: faker.lorem.sentence(),
               comments: [
                 { content: faker.lorem.text() },
@@ -261,7 +261,7 @@ describe("modifying results", () => {
               ],
             },
             {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               title: faker.lorem.sentence(),
               comments: null,
             },
@@ -269,22 +269,22 @@ describe("modifying results", () => {
         },
         comments: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             content: faker.lorem.text(),
             author: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               email: faker.internet.email(),
             },
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             content: faker.lorem.text(),
             author: null,
           },
         ],
       },
       {
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         title: faker.lorem.sentence(),
         author: null,
         comments: null,
@@ -331,7 +331,7 @@ describe("modifying results", () => {
     const email = faker.internet.email();
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email,
       })
     );
@@ -363,7 +363,7 @@ describe("modifying results", () => {
     const email = faker.internet.email();
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email,
       })
     );
@@ -399,11 +399,11 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
           },
         ],
@@ -454,11 +454,11 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
           },
         ],
@@ -508,11 +508,11 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
           },
         ],
@@ -563,11 +563,11 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
           },
         ],
@@ -620,26 +620,26 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
         ],
       })
     );
     const params = createParams(query, "User", "findUnique", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       include: {
         profile: true,
         posts: true,
@@ -694,26 +694,26 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
         ],
       })
     );
     const params = createParams(query, "User", "findUnique", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       include: {
         profile: true,
         posts: true,
@@ -767,26 +767,26 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
         ],
       })
     );
     const params = createParams(query, "User", "findUnique", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       select: {
         profile: true,
         posts: true,
@@ -841,26 +841,26 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
         ],
       })
     );
     const params = createParams(query, "User", "findUnique", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       select: {
         profile: true,
         posts: true,
@@ -911,23 +911,23 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1008,23 +1008,23 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1104,23 +1104,23 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1201,23 +1201,23 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1300,21 +1300,21 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
           user: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             ],
@@ -1322,19 +1322,19 @@ describe("modifying results", () => {
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1449,21 +1449,21 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
           user: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             ],
@@ -1471,19 +1471,19 @@ describe("modifying results", () => {
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1597,21 +1597,21 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
           user: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             ],
@@ -1619,19 +1619,19 @@ describe("modifying results", () => {
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1746,21 +1746,21 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.text(),
           user: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             ],
@@ -1768,19 +1768,19 @@ describe("modifying results", () => {
         },
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -1891,15 +1891,15 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             ],
@@ -1961,15 +1961,15 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
               },
             ],
@@ -2031,19 +2031,19 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -2118,19 +2118,19 @@ describe("modifying results", () => {
 
     const query = jest.fn((args) =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: args.data.email,
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: args.data.posts.create.title,
             comments: [
               {
-                id: faker.datatype.number(),
+                id: faker.number.int(),
                 content: faker.lorem.sentence(),
                 replies: [
                   {
-                    id: faker.datatype.number(),
+                    id: faker.number.int(),
                     content: faker.lorem.sentence(),
                   },
                 ],
@@ -2201,17 +2201,17 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         title: faker.lorem.sentence(),
         author: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           email: faker.internet.email(),
         },
       })
     );
 
     const params = createParams(query, "Post", "findFirst", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       include: { author: true },
     });
 
@@ -2242,31 +2242,31 @@ describe("modifying results", () => {
     const query = jest.fn(() =>
       Promise.resolve([
         {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           title: faker.lorem.sentence(),
           author: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
             deleted: true,
           },
         },
         {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           title: faker.lorem.sentence(),
           author: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
           },
         },
         {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           title: faker.lorem.sentence(),
           author: null,
         },
       ])
     );
     const params = createParams(query, "Post", "findMany", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       include: { author: true },
     });
 
@@ -2312,13 +2312,13 @@ describe("modifying results", () => {
     const query = jest.fn(() =>
       Promise.resolve([
         {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           title: faker.lorem.sentence(),
           author: {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             email: faker.internet.email(),
             profile: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               bio: faker.lorem.paragraph(),
             },
           },
@@ -2326,7 +2326,7 @@ describe("modifying results", () => {
       ])
     );
     const params = createParams(query, "Post", "findMany", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       include: {
         author: {
           include: { profile: true },
@@ -2366,22 +2366,22 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         title: faker.lorem.sentence(),
         comments: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             content: faker.lorem.paragraph(),
             author: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               email: faker.internet.email(),
             },
           },
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             content: faker.lorem.paragraph(),
             author: {
-              id: faker.datatype.number(),
+              id: faker.number.int(),
               email: faker.internet.email(),
             },
           },
@@ -2389,7 +2389,7 @@ describe("modifying results", () => {
       })
     );
     const params = createParams(query, "Post", "findUnique", {
-      where: { id: faker.datatype.number() },
+      where: { id: faker.number.int() },
       include: {
         comments: {
           include: { author: true },
@@ -2765,16 +2765,16 @@ describe("modifying results", () => {
 
     const query = jest.fn(() =>
       Promise.resolve({
-        id: faker.datatype.number(),
+        id: faker.number.int(),
         email: faker.internet.email(),
         posts: [
           {
-            id: faker.datatype.number(),
+            id: faker.number.int(),
             title: faker.lorem.sentence(),
           },
         ],
         profile: {
-          id: faker.datatype.number(),
+          id: faker.number.int(),
           bio: faker.lorem.sentence(),
         },
       })
