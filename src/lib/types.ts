@@ -1,6 +1,5 @@
 import type { Prisma } from "@prisma/client";
-import type { Types } from "@prisma/client/runtime/library";
-import { DeferredPromise } from "@open-draft/deferred-promise";
+import type { Types } from "@prisma/client/runtime/client";
 
 export type Modifier = "is" | "isNot" | "some" | "none" | "every";
 export type LogicalOperator = "AND" | "OR" | "NOT";
@@ -51,7 +50,7 @@ export type WriteTarget = {
 export type Target = ReadTarget | WriteTarget | QueryTarget;
 
 export type OperationCall<ExtArgs extends Types.Extensions.InternalArgs> = {
-  queryPromise: DeferredPromise<any>;
+  queryPromise: PromiseWithResolvers<any>;
   result: Promise<any>;
   updatedArgs: any;
   origin: Target;
