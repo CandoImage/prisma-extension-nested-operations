@@ -1,5 +1,5 @@
 import type { Prisma } from "@prisma/client";
-import type { BaseDMMF, Types } from "@prisma/client/runtime/library";
+import type { BaseDMMF, Types } from "@prisma/client/runtime/client";
 
 import { OperationCall, NestedParams } from "./types";
 import { extractNestedOperations } from "./utils/extractNestedOperations";
@@ -34,6 +34,7 @@ export function withNestedOperations<
   $rootOperation,
   $allNestedOperations,
   dmmf,
+  inlineSchema,
 }: {
   $rootOperation: NonNullable<
     Types.Extensions.DynamicQueryExtensionArgs<
@@ -43,8 +44,26 @@ export function withNestedOperations<
   >;
   $allNestedOperations: (params: NestedParams<ExtArgs>) => Promise<any>;
   dmmf: BaseDMMF;
+  /** Raw Prisma schema text — required for Prisma 7+ to accurately determine isList
+   *  for relation fields (DMMF no longer includes that metadata). Obtain via
+   *  `(client as any)._engineConfig?.inlineSchema` inside a `$extends` callback. */
+  inlineSchema: string | undefined;
 }): typeof $rootOperation {
-  const relationsByModel = getRelationsByModel(dmmf);
+  // Detect Prisma 7+ by checking whether isList is missing from DMMF relation fields
+  const firstRelationField = dmmf.datamodel.models
+    .flatMap((m) => m.fields)
+    .find((f) => f.kind === "object" && (f as any).relationName);
+  const isPrisma7 = firstRelationField && (firstRelationField as any).isList === undefined;
+
+  if (isPrisma7 && !inlineSchema) {
+    throw new Error(
+      "[prisma-extension-nested-operations] inlineSchema is required for Prisma 7+ but was not provided. " +
+        "If you are using this library directly, pass `(client as any)._engineConfig?.inlineSchema` to withNestedOperations(). " +
+        "If you are using an extension built on this library, this may indicate a Prisma version incompatibility — please check for updates."
+    );
+  }
+
+  const relationsByModel = getRelationsByModel(dmmf, inlineSchema);
 
   return async (rootParams) => {
     let calls: OperationCall<ExtArgs>[] = [];

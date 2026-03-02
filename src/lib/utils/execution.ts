@@ -1,5 +1,4 @@
-import type { Types } from "@prisma/client/runtime/library";
-import { DeferredPromise } from "@open-draft/deferred-promise";
+import type { Types } from "@prisma/client/runtime/client";
 import { omit } from "lodash";
 
 import { ExecuteFunction, NestedParams, OperationCall, Target } from "../types";
@@ -12,8 +11,9 @@ export async function executeOperation<
   params: NestedParams<ExtArgs>,
   target: Target
 ): Promise<OperationCall<ExtArgs>> {
-  const queryCalledPromise = new DeferredPromise<any>();
-  const queryPromise = new DeferredPromise<any>();
+  const queryCalledPromise = Promise.withResolvers<any>();
+  const queryPromise = Promise.withResolvers<any>();
+  let queryResolved = false;
 
   const result = execute({
     ...cloneArgs(params),
@@ -22,19 +22,20 @@ export async function executeOperation<
         updatedArgs,
         updatedOperation,
       });
-      return queryPromise;
+      queryResolved = true;
+      return queryPromise.promise;
     },
   }).catch((e) => {
     // reject params updated callback so it throws when awaited
     queryCalledPromise.reject(e);
 
     // if next has already been resolved we must throw
-    if (queryPromise.state === "fulfilled") {
+    if (queryResolved) {
       throw e;
     }
   });
 
-  const { updatedArgs, updatedOperation } = await queryCalledPromise;
+  const { updatedArgs, updatedOperation } = await queryCalledPromise.promise;
 
   // execute middleware with updated params if action has changed
   if (updatedOperation !== params.operation) {
@@ -49,9 +50,8 @@ export async function executeOperation<
     );
   }
 
-  // execute middleware with updated params if action has changed
   return {
-    queryPromise,
+    queryPromise: queryPromise,
     result,
     updatedArgs,
     origin: target,

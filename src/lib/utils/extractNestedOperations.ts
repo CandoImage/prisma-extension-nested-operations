@@ -1,5 +1,5 @@
 import type { Prisma } from "@prisma/client";
-import type { Types } from "@prisma/client/runtime/library";
+import type { Types } from "@prisma/client/runtime/client";
 import get from "lodash/get";
 
 import {
@@ -59,7 +59,7 @@ export function extractRelationLogicalWhereOperations<
   parentOperations.forEach(({ logicalOperator, index }) => {
     operationsPath.push(logicalOperator);
 
-    if (typeof index === "number") {
+    if (index !== undefined) {
       operationsPath.push(index.toString());
     }
   });
